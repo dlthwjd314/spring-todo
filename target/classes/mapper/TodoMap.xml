@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @Mapper 사용하는 경우, namespace에 dao의 경로를 작 -->
+<mapper namespace="com.myapp.todo.dao.TodoDAO" >
+	<!-- select Query -->
+	<select id="getAll" resultType="com.myapp.todo.vo.TodoVO">
+		SELECT * FROM "Todo"
+	</select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.todo.todo;
+package com.myapp.todo;
 
 import java.text.DateFormat;
 import java.util.Date;
