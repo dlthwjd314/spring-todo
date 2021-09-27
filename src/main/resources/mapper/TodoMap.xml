@@ -2,9 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- @Mapper 사용하는 경우, namespace에 dao의 경로를 작 -->
-<mapper namespace="com.myapp.todo.dao.TodoDAO" >
+<!-- <mapper namespace="myapp" > -->
+<mapper namespace="com.myapp.todo.dao.TodoDAO">
 	<!-- select Query -->
 	<select id="getAll" resultType="com.myapp.todo.vo.TodoVO">
-		SELECT * FROM "Todo"
+		SELECT * FROM "Todo" ORDER BY id
 	</select>
+	
+	<select id="getByDate" resultType="com.myapp.todo.vo.TodoVO">
+		SELECT * FROM "Todo" WHERE date LIKE #{date} ORDER BY id
+	</select>
+
+
+	<select id="getLastData" resultType="com.myapp.todo.vo.TodoVO">
+		SELECT * FROM "Todo" 
+		WHERE id = (SELECT max(id) FROM "Todo")
+	</select>
+
+<!-- insert, update, delete 에는 resultType 없음 -> 삽입 / 수정/ 삭제에 성공한 행의 수 (rows)를 반환 -->
+	<insert id="insertTodo">
+		INSERT INTO "Todo"(description, date) VALUES
+		(#{description},#{date})
+	</insert>
+
+	<update id="updateTodo">
+		UPDATE "Todo" SET description=#{description},
+		checked=#{checked},
+		date=#{date} WHERE id=#{id}
+	</update>
+
+	<delete id="deleteTodo">
+		DELETE FROM "Todo" WHERE id=#{id}
+	</delete>
 </mapper>
